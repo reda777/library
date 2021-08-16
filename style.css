@@ -1,11 +1,16 @@
 .books{
     display: grid;
-    width: 500px;
-    grid-template-columns: repeat(auto-fill, 100px);
+    width: 750px;
+    grid-template-columns: repeat(auto-fill, 150px);
 }
 .book{
-    border: 1px black solid;
-    border-radius: 2px;
-    height: 98px;
-    width: 98px;
+    border-top: 1px black solid;
+    height: 149px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.newB form{
+    display: none;
 }
