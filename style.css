@@ -14,6 +14,6 @@
 .newB form{
     display: none;
 }
-.remove{
+[data-index-number]{
     cursor: pointer;
 }
