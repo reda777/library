@@ -23,11 +23,17 @@ function displayBook(newBook){
     const author=document.createElement('span');
     const pages=document.createElement('span');
     const status=document.createElement('span');
+    status.setAttribute('class','status');
+    const toggle=document.createElement('span');
     const remove=document.createElement('span');
     title.textContent='Title :'+newBook.title;
     author.textContent='Author :'+newBook.author;
     pages.textContent='Pages :'+newBook.pages;
-    status.textContent=`Status :${(newBook.read)?"read":"not read yet"}`;
+    status.textContent=`Read :${(newBook.read)?"yes":"no"}`;
+    status.setAttribute('data-index-number',myLibrary.indexOf(newBook));
+    toggle.textContent='toggle';
+    toggle.setAttribute('id','tog');
+    toggle.addEventListener('click',()=>{toggleRead(newBook);});
     remove.textContent='X';
     remove.setAttribute('data-index-number',myLibrary.indexOf(newBook));
     remove.addEventListener('click',removeBook);
@@ -35,8 +41,16 @@ function displayBook(newBook){
     book.appendChild(author);
     book.appendChild(pages);
     book.appendChild(status);
+    book.appendChild(toggle);
     book.appendChild(remove);
     books.appendChild(book);
+}
+function toggleRead(bookToggle){
+    (bookToggle.read)?bookToggle.read=false:bookToggle.read=true;
+    console.log(myLibrary.indexOf(bookToggle));
+    const status=document.querySelector('.status[data-index-number="'+myLibrary.indexOf(bookToggle)+'"]');
+    status.textContent=`Read :${(bookToggle.read)?"yes":"no"}`;;
+    console.log('clicked',bookToggle.read);
 }
 function showForm(){
     if(newB.textContent==='add book'){
@@ -50,7 +64,7 @@ function showForm(){
 }
 newB.addEventListener('click',showForm);
 
-form.addEventListener("submit", function(event) {
+form.addEventListener('submit', function(event) {
     event.preventDefault();
     let insertBook=new Book(form.elements[0].value,form.elements[1].value
         ,Number(form.elements[2].value)
@@ -59,8 +73,8 @@ form.addEventListener("submit", function(event) {
     displayBook(insertBook);
 });
 function removeBook(){
-    const deleteBook=document.querySelector('[data-index-number="'+this.dataset.indexNumber+'"]').parentNode;
-    console.log(this.dataset.indexNumber);
+    const deleteBook=document.querySelector(
+        '[data-index-number="'+this.dataset.indexNumber+'"]').parentNode;
     deleteBook.remove();
     delete myLibrary[this.dataset.indexNumber];
 }
