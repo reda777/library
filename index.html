@@ -3,33 +3,39 @@
     <head>
         <script type="text/javascript" src="script.js" defer></script>
         <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="allDivs">
-            <div class="newB">
+            <div class="addBook">
                 <button>add book</button>
-                <form action="">
-                    <div class="textInput">
-                        <label for="title">Title: </label>
-                        <input type="text" name="title" id="title" required>
-                    </div>
-                    <div class="textInput">
-                        <label for="author">Author: </label>
-                        <input type="text" name="author" id="author" required>
-                    </div>
-                    <div class="textInput">
-                        <label for="pages">Number of pages: </label>
-                        <input type="text" name="pages" id="pages" required>
-                    </div>
-                    <div class="radioInput">
-                        <legend>Title</legend>
-                        <label><input type="radio" name="status" value="true"> read</label>
-                        <label><input type="radio" name="status" value="false"> not read</label>
-                    </div>
-                    <div>
-                    <input type="submit" value="Add">
-                    </div>
-                </form>
+            </div>
+            <div class="overlay">
+                <div class="content">
+                    <form action="">
+                        <div class="textInput">
+                            <label for="title">Title :</label>
+                            <input type="text" name="title" id="title" required>
+                        </div>
+                        <div class="textInput">
+                            <label for="author">Author :</label>
+                            <input type="text" name="author" id="author" required>
+                        </div>
+                        <div class="textInput">
+                            <label for="pages">Number of pages :</label>
+                            <input type="text" name="pages" id="pages" required>
+                        </div>
+                        <div class="radioInput">
+                            <legend>Have read :</legend>
+                            <label><input type="radio" name="status" value="true"> read</label>
+                            <label><input type="radio" name="status" value="false"> not read</label>
+                        </div>
+                        <div class="submitCancel">
+                            <input type="submit" value="Add">
+                            <input id="closeAdd" type="button" value="Cancel">
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="books">
 
@@ -37,12 +43,3 @@
         </div>
     </body>
 </html>
-<div>
-    <span>title :</span>
-    <span>book1</span>
-</div>
-<div>
-    <span>Read :</span>
-    <span>yes</span>
-    <div></div>
-</div>

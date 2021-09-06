@@ -1,6 +1,8 @@
 body{
     padding: 0;
     margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
 }
 .allDivs{
     display: flex;
@@ -10,8 +12,15 @@ body{
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+    flex-grow: 1;
     background-color: rgb(189, 189, 189);
 }
+/*add book*/
+.addBook{
+    width: 350px;
+    height: 100vh;
+}
+
 /*book block*/
 .book{
     display: flex;
@@ -25,27 +34,91 @@ body{
     background-color: rgb(185, 223, 224);
 }
 /*inside book*/
+.book .dropdown{
+    user-select: none;
+    height: 20px;
+    display:flex;
+    align-items: center;
+    position: relative;
+    padding: 0 5px;
+    /*border-left: inherit;
+    border-bottom: inherit;
+    border-bottom-left-radius: 5px;*/
+}
+.dropdown>span{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+.book .dropcontent{
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    position: absolute;
+    padding:0;
+    font-size: 14px;
+    top:20px;
+    z-index: 1;
+    overflow: auto;
+    min-width: 75px;
+    background-color: rgb(255, 255, 255);
+}
+.dropcontent span{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left:5px;
+    cursor: pointer;
+}
+.dropcontent span:hover{
+    background-color: rgb(179, 179, 179);
+}
 .book div{
     height: 45px;
     display: flex;
     align-items: center;
+    padding-left: 5px;
 }
-.book div:first-child{
-    height: 20px;
-    width: 20px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    cursor: pointer;
-    border-left: inherit;
-    border-bottom: inherit;
-    border-bottom-left-radius: 5px;
+.child1{
+    font-weight: 600;
 }
+
 #tog{
     cursor: pointer;
     height: 45px;
     width: 50px;
+}
+
+/*overlay background*/
+.overlay{
+    display: none;
+    /*align-items: center;*/
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    /*background-color: rgb(134, 145, 156);*/
+    background-color: rgba(134, 145, 156, 0.788);
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    transition: 200ms;
+}
+/*overlay content*/
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    position: relative;
+    top: 15%;
+    background-color: rgb(224, 222, 222);
+    border-radius: 10%;
+}
+form div{
+    margin: 8px;
 }
 /* text input*/
 .textInput{
@@ -53,9 +126,10 @@ body{
     flex-direction: column;
 }
 input[type=text]{
-    height: 3vh;
-    width: 200px;
-    background-color: cadetblue;
+    height: 30px;
+    font-size: 21px;
+    width: 300px;
+    background-color: rgb(255, 255, 255);
     border:none;
     border: 1px oldlace solid;
     border-radius: 5px;
@@ -65,21 +139,37 @@ input[type=text]:focus {
 }
 /*radio input*/
 input[type=radio] {
-    border: 1px solid #fff;
-    padding: 0.5em;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 6px;
+    background-color: rgb(224, 222, 222);
     -webkit-appearance: none;
 }
 input[type=radio]:checked {
-    background: url(data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center;
-    background-size: 9px 9px;
+    background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center;
+    background-size: 10px 10px;
+    background-color: rgb(224, 222, 222);
 }
 input[type=radio]:focus {
     outline-color: transparent;
 }
-.newB{
-    background-color: rgb(12, 107, 170);
-    height: 100vh;
+/*buttons add cancel*/
+.submitCancel{
+    display: flex;
+    justify-content: space-between;
+
 }
-.newB form{
-    display: none;
+input[type=button], input[type=submit]{
+    width: 150px;
+    height: 45px;
+    border: 1px grey solid;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    transition: 250ms;
 }
+input[type=button]:hover, input[type=submit]:hover{
+    background-color: rgb(173, 166, 166);
+    cursor: pointer;
+}
+
+
+
