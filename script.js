@@ -78,25 +78,17 @@ function displayBook(bookIndex){
     dropDownDiv.appendChild(dropDownButton);
     dropDownDiv.appendChild(dropDownContent);
     dropDownButton.addEventListener('click',()=>{
-        let compStyle=window.getComputedStyle(dropDownContent).display;
+        const compStyle=window.getComputedStyle(dropDownContent).display;
         if(compStyle==='flex')
             dropDownContent.style.display='none';
         if(compStyle==='none')
             dropDownContent.style.display='flex';
     });
     deleteButton.addEventListener('click',()=>{
-        let deleteBook=document.querySelector('#book'+bookIndex);
+        const deleteBook=document.querySelector('#book'+bookIndex);
         deleteBook.remove();
         localStorage.removeItem(bookIndex);
     });
-    /*delete book button
-    const remove=document.createElement('div');
-    remove.textContent='X';
-    remove.addEventListener('click',()=>{
-        let deleteBook=document.querySelector('#book'+bookIndex);
-        deleteBook.remove();
-        localStorage.removeItem(bookIndex);
-    });*/
     /*append children*/
     book.appendChild(dropDownDiv);
     book.appendChild(titleDiv);
@@ -105,9 +97,15 @@ function displayBook(bookIndex){
     book.appendChild(statusDiv);
     books.appendChild(book);
 }
+/*show stats*/
+function updateStats(){
+    const stats=document.querySelector('.stats ul');
+    const li1=document.createElement('li');
+    li1.textContent=`To read ${}`;
+}
 /*hide/show form*/
 button.addEventListener('click',()=>{
-        overlay.style.display = "flex";
+    overlay.style.display = "flex";
 });
 closeAdd.addEventListener('click',()=>{
     overlay.style.display = "none";
@@ -118,11 +116,36 @@ form.addEventListener('submit', function(event) {
     let insertBook=new Book(form.elements[0].value,form.elements[1].value
         ,Number(form.elements[2].value)
         ,(form.elements[3].checked)?true:false);
-    localStorage.setItem(localStorage.length,JSON.stringify(insertBook));
-    displayBook(localStorage.length-1);
+    localStorage.setItem(localStorageFullLength(),JSON.stringify(insertBook));
+    displayBook(localStorageFullLength()-1);
     overlay.style.display = "none";
 });
-
+/*function readBooksCount(){
+    let i=0;
+    let count=0;
+    while(count<localStorage.length){
+        if(!localStorage.getItem(i))
+            i++;
+        else if(localStorage.getItem(i)){
+            i++;
+            count++;
+        }  
+    }
+    
+};*/
+function localStorageFullLength(){
+    let i=0;
+    let count=0;
+    while(count<localStorage.length){
+        if(!localStorage.getItem(i))
+            i++;
+        else if(localStorage.getItem(i)){
+            i++;
+            count++;
+        }  
+    }
+    return i;  
+};
 window.onload=function(){
     let i=0;
     let count=0;
@@ -137,8 +160,11 @@ window.onload=function(){
     }     
 };
 window.addEventListener('click', function(e) {
-    var content=document.querySelector('.dropcontent');
-    if (e.target != document.querySelector('.dropdown>span')) {
-        content.style.display = 'none';
-    }
+    const allBooks=document.querySelectorAll('.book');
+    allBooks.forEach(element => {
+        let content=element.querySelector('.dropcontent');
+        if (e.target != element.querySelector('.dropdown img')) {
+            content.style.display = 'none';
+        }
+    });
 });

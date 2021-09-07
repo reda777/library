@@ -7,8 +7,19 @@
     </head>
     <body>
         <div class="allDivs">
-            <div class="addBook">
-                <button>add book</button>
+            <div class="header">
+                <h1>Library</h1>
+            </div>
+            <div class="sidebar">
+                <div class="addBook">
+                    <button>New Book</button>
+                </div>
+                <hr/>
+                <div class="stats">
+                    <ul>
+                        <li>exemple (0)</li>
+                    </ul>
+                </div>
             </div>
             <div class="overlay">
                 <div class="content">
@@ -27,7 +38,7 @@
                         </div>
                         <div class="radioInput">
                             <legend>Have read :</legend>
-                            <label><input type="radio" name="status" value="true"> read</label>
+                            <label><input type="radio" name="status" value="true" checked> read</label>
                             <label><input type="radio" name="status" value="false"> not read</label>
                         </div>
                         <div class="submitCancel">
