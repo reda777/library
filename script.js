@@ -18,6 +18,7 @@ function displayBook(bookIndex){
     book.setAttribute('class','book');
     /*title div*/
     const titleDiv=document.createElement('div');
+    titleDiv.setAttribute('class','titleDiv');
     const titleChild1=document.createElement('span');
     titleChild1.setAttribute('class','child1');
     const titleChild2=document.createElement('span');
@@ -27,6 +28,7 @@ function displayBook(bookIndex){
     titleDiv.appendChild(titleChild2);
     /*author div*/
     const authorDiv=document.createElement('div');
+    authorDiv.setAttribute('class','authorDiv');
     const authorChild1=document.createElement('span');
     authorChild1.setAttribute('class','child1');
     const authorChild2=document.createElement('span');
@@ -36,6 +38,7 @@ function displayBook(bookIndex){
     authorDiv.appendChild(authorChild2);
     /*pages div*/
     const pagesDiv=document.createElement('div');
+    pagesDiv.setAttribute('class','pagesDiv');
     const pagesChild1=document.createElement('span');
     pagesChild1.setAttribute('class','child1');
     const pagesChild2=document.createElement('span');
@@ -45,6 +48,7 @@ function displayBook(bookIndex){
     pagesDiv.appendChild(pagesChild2);
     /*read status*/
     const statusDiv=document.createElement('div');
+    statusDiv.setAttribute('class','statusDiv');
     const statusChild1=document.createElement('span');
     statusChild1.setAttribute('class','child1');
     const statusChild2=document.createElement('span');
@@ -84,6 +88,16 @@ function displayBook(bookIndex){
         if(compStyle==='none')
             dropDownContent.style.display='flex';
     });
+    editButton.addEventListener('click',()=>{
+        const editBook=document.querySelector('#book'+bookIndex);
+        const editChild1=editBook.querySelectorAll('.child1 + span');
+        editChild1.forEach(element => {
+            element.textContent='';
+            const inputTitle=document.createElement('input');
+            inputTitle.setAttribute('type','text');
+            element.appendChild(inputTitle);
+        });
+    });
     deleteButton.addEventListener('click',()=>{
         const deleteBook=document.querySelector('#book'+bookIndex);
         deleteBook.remove();
@@ -101,7 +115,8 @@ function displayBook(bookIndex){
 function updateStats(){
     const stats=document.querySelector('.stats ul');
     const li1=document.createElement('li');
-    li1.textContent=`To read ${}`;
+    li1.textContent=`To read (${ localStorageFullLength()-readBooksCount()})`;
+    stats.appendChild(li1);
 }
 /*hide/show form*/
 button.addEventListener('click',()=>{
@@ -120,22 +135,26 @@ form.addEventListener('submit', function(event) {
     displayBook(localStorageFullLength()-1);
     overlay.style.display = "none";
 });
-/*function readBooksCount(){
-    let i=0;
-    let count=0;
+function readBooksCount(){
+    let i=0,
+        count=0,
+        readCount=0;
     while(count<localStorage.length){
         if(!localStorage.getItem(i))
             i++;
         else if(localStorage.getItem(i)){
+            let temp=JSON.parse(localStorage.getItem(i));
+            if(temp.read)
+                readCount++;
             i++;
             count++;
         }  
     }
-    
-};*/
+    return readCount;
+};
 function localStorageFullLength(){
-    let i=0;
-    let count=0;
+    let i=0,
+        count=0;
     while(count<localStorage.length){
         if(!localStorage.getItem(i))
             i++;
