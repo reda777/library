@@ -7,15 +7,14 @@ html, body {
     height: 100%;
 }
 body{
-    font-family: 'Quicksand', sans-serif;
+    font-family: Arial, sans-serif;
+    /*font-family: 'Quicksand', sans-serif;*/
     font-weight: 500;
-    background-color: burlywood;
 }
 .allDivs{
     display: grid;
     grid-template-columns: 300px auto;
     grid-template-rows: 100px auto;
-    background-color: crimson;
     height: 100%;
 }
 .books{
@@ -24,34 +23,49 @@ body{
     align-content: flex-start;
     justify-content: center;
     flex-grow: 1;
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(224, 222, 222);
+}
+hr{
+    border:0;
+    margin:0;
+    width:100%;
+    height:1px;
+    background: #e98401;
 }
 /*header*/
 .header{
     grid-column: 1/3;
     grid-row: 1/2;
-    background-color: blueviolet;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom:3px solid #e98401;
 }
 /*sidebar*/
 .sidebar{
     grid-column: 1/2;
     grid-row: 2/2;
-    background-color: brown;
+    border-right: 2px solid #e98401;
 }
 /*new book button*/
 .addBook{
     height: 100px;
     display: flex;
     align-items: center;
-    padding-left: 25px;
+    justify-content: center;
 }
 .addBook button{
+    cursor: pointer;
     width: 100px;
     height: 50px;
-    font-size: 18px;
+    font-size: 16px;
+    background-color: transparent;
+    border: 2px solid #e98401;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.addBook button:hover{
+    background-color: #e98401;
 }
 /*stats*/
 .stats{
@@ -60,10 +74,16 @@ body{
 .stats ul{
     list-style-type: none;
 }
+.stats li{
+    padding: 5px 0;
+}
 /*book block*/
 .books input[type=text]{
     height: 30px;
     width: 100%;
+}
+.books label{
+    padding-left: 5px;
 }
 .book{
     display: flex;
@@ -73,9 +93,17 @@ body{
     border: 1px rgb(172, 167, 167) solid;
     height: 200px;
     width: 200px;
-    background-color: rgb(185, 223, 224);
+    background-color: rgb(255, 255, 255);
 }
 /*inside book*/
+.saveButton{
+    display: none;
+    border: 1px solid rgb(172, 167, 167);
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 0 2px;
+    cursor: pointer;
+}
 .book .dropdown{
     justify-content: flex-end;
     user-select: none;
@@ -88,7 +116,7 @@ body{
     border-bottom: inherit;
     border-bottom-left-radius: 5px;*/
 }
-.dropdown>span{
+.dropdown-button{
     cursor: pointer;
     width: 20px;
     height: 20px;
