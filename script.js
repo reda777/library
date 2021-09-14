@@ -12,6 +12,9 @@ function Book(title,author,pages,read) {
 }
 function displayBook(bookIndex){
     let bookObj=JSON.parse(localStorage.getItem(bookIndex));
+    /*create book border div*/
+    const bookBorder=document.createElement('div');
+    bookBorder.setAttribute('class','book-border');
     /*create book block*/
     const book=document.createElement('div');
     book.setAttribute('id','book'+bookIndex);
@@ -146,7 +149,8 @@ function displayBook(bookIndex){
     book.appendChild(authorDiv);
     book.appendChild(pagesDiv);
     book.appendChild(statusDiv);
-    books.appendChild(book);
+    bookBorder.appendChild(book);
+    books.appendChild(bookBorder);
 }
 /*show stats*/
 function updateStats(){
@@ -157,22 +161,34 @@ function updateStats(){
         });
     }
     const stats=document.querySelector('.stats ul');
+    /*all books*/
+    const li=document.createElement('li');
+    li.textContent=`All (${ localStorage.length })`;
+    li.addEventListener('click',()=>{
+        books.innerHTML='';
+        displayAllBooks();
+    });
+    stats.appendChild(li);
     /*to read*/
     const li1=document.createElement('li');
     li1.textContent=`To read (${ localStorage.length-readBooksCount()})`;
+    li1.addEventListener('click',()=>{
+        books.innerHTML='';
+        displayNotReadBooks();
+    });
     stats.appendChild(li1);
     /*have read*/
     const li2=document.createElement('li');
     li2.textContent=`Have read (${readBooksCount()})`;
+    li2.addEventListener('click',()=>{
+        books.innerHTML='';
+        displayReadBooks();
+    });
     stats.appendChild(li2);
-    /*reading now*/
-    const li3=document.createElement('li');
-    li3.textContent=`Reading now (${0})`;
-    stats.appendChild(li3);
     /*favorites*/
-    const li4=document.createElement('li');
-    li4.textContent=`Favorites (${0})`;
-    stats.appendChild(li4);
+    const li3=document.createElement('li');
+    li3.textContent=`Favorites (${0})`;
+    stats.appendChild(li3);
 }
 /*hide/show form*/
 button.addEventListener('click',()=>{
@@ -224,6 +240,8 @@ function localStorageFullLength(){
 function displayAllBooks(){
     let i=0;
     let count=0;
+    if(localStorage.length>0)
+        books.innerHTML='';
     while(count<localStorage.length){
         if(!localStorage.getItem(i))
             i++;
@@ -233,6 +251,40 @@ function displayAllBooks(){
             count++;
         }  
     }     
+};
+function displayNotReadBooks(){
+    let i=0,
+        count=0,
+        readCount=0;
+    while(count<localStorage.length){
+        if(!localStorage.getItem(i))
+            i++;
+        else if(localStorage.getItem(i)){
+            let temp=JSON.parse(localStorage.getItem(i));
+            if(!temp.read)
+                displayBook(i);
+            i++;
+            count++;
+        }  
+    }
+    return readCount;
+};
+function displayReadBooks(){
+    let i=0,
+        count=0,
+        readCount=0;
+    while(count<localStorage.length){
+        if(!localStorage.getItem(i))
+            i++;
+        else if(localStorage.getItem(i)){
+            let temp=JSON.parse(localStorage.getItem(i));
+            if(temp.read)
+                displayBook(i);
+            i++;
+            count++;
+        }  
+    }
+    return readCount;
 };
 window.onload=function(){
     displayAllBooks();
