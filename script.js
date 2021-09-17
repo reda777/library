@@ -92,46 +92,59 @@ function displayBook(bookIndex){
         const editBook=document.querySelector('#book'+bookIndex);
         editBook.querySelector('.dropdown').setAttribute('style','justify-content: space-between;');
         editBook.querySelector('.saveButton').style.display='block';
-        const editChild1=editBook.querySelectorAll('.child1 + span');
-        editChild1.forEach(element => {
-            if(element.parentNode.className === 'statusDiv'){
-                const label1=document.createElement('label');
-                const label2=document.createElement('label');
-                const input1=document.createElement('input');
-                const input2=document.createElement('input');
-                label1.textContent='yes';
-                label2.textContent='no';
-                input1.setAttribute('type','radio');
-                input2.setAttribute('type','radio');
-                input1.setAttribute('name','editedStatus'+bookIndex);
-                input2.setAttribute('name','editedStatus'+bookIndex);
-                input1.setAttribute('value','true');
-                input2.setAttribute('value','false');
-                input1.checked=true;
-                element.textContent='';
-                label1.appendChild(input1);
-                label2.appendChild(input2);
-                element.appendChild(label1);
-                element.appendChild(label2);
-                /*element.textContent='Tog';
-                element.addEventListener('click',()=>{
-                    (bookObj.read)?bookObj.read=false:bookObj.read=true;
-                    statusChild2.textContent=`${(bookObj.read)?'yes':'no'}`;
-                    localStorage.setItem(bookIndex,JSON.stringify(bookObj));
-                });*/
-            }
-            else{
-                element.textContent='';
-                const inputTitle=document.createElement('input');
-                inputTitle.setAttribute('type','text');
-                element.appendChild(inputTitle);
-            }
-        });
+        /*title*/
+        const editTitle=editBook.querySelector('.titleDiv span:last-child');
+        editTitle.textContent='';
+        const inputTitle=document.createElement('input');
+        inputTitle.setAttribute('type','text');
+        inputTitle.value=bookObj.title;
+        editTitle.appendChild(inputTitle);
+        /*author*/
+        const editAuthor=editBook.querySelector('.authorDiv span:last-child');
+        editAuthor.textContent='';
+        const inputAuthor=document.createElement('input');
+        inputAuthor.setAttribute('type','text');
+        inputAuthor.value=bookObj.author;
+        editAuthor.appendChild(inputAuthor);
+        /*pages*/
+        const editPages=editBook.querySelector('.pagesDiv span:last-child');
+        editPages.textContent='';
+        const inputPages=document.createElement('input');
+        inputPages.setAttribute('type','text');
+        inputPages.value=bookObj.pages;
+        editPages.appendChild(inputPages);
+        /*yes no*/
+        const editStatus=editBook.querySelector('.statusDiv span:last-child');
+        const label1=document.createElement('label');
+        const label2=document.createElement('label');
+        const input1=document.createElement('input');
+        const input2=document.createElement('input');
+        label1.textContent='yes';
+        label2.textContent='no';
+        input1.setAttribute('type','radio');
+        input2.setAttribute('type','radio');
+        input1.setAttribute('name','editedStatus'+bookIndex);
+        input2.setAttribute('name','editedStatus'+bookIndex);
+        input1.setAttribute('value','true');
+        input2.setAttribute('value','false');
+        if(bookObj.read)
+            input1.checked=true;
+        else
+            input2.checked=true;
+        editStatus.textContent='';
+        label1.appendChild(input1);
+        label2.appendChild(input2);
+        editStatus.appendChild(label1);
+        editStatus.appendChild(label2);
     });
     deleteButton.addEventListener('click',()=>{
-        const deleteBook=document.querySelector('#book'+bookIndex);
+        const deleteBook=document.querySelector('#book'+bookIndex).parentNode;
         deleteBook.remove();
         localStorage.removeItem(bookIndex);
+        if(localStorage.length===0){
+            books.setAttribute('class','books books-empty');
+            document.querySelector('.empty-page').removeAttribute('style');
+        }
     });
     saveEdit.addEventListener('click',()=>{
         const saveBook=document.querySelector('#book'+bookIndex);
@@ -185,10 +198,6 @@ function updateStats(){
         displayReadBooks();
     });
     stats.appendChild(li2);
-    /*favorites*/
-    const li3=document.createElement('li');
-    li3.textContent=`Favorites (${0})`;
-    stats.appendChild(li3);
 }
 /*hide/show form*/
 button.addEventListener('click',()=>{
@@ -199,13 +208,16 @@ closeAdd.addEventListener('click',()=>{
 });
 /*submit button*/
 form.addEventListener('submit', function(event) {
+    if(localStorage.length===0)
+        document.querySelector('.empty-page').style.display='none';
     event.preventDefault();
     let insertBook=new Book(form.elements[0].value,form.elements[1].value
         ,Number(form.elements[2].value)
         ,(form.elements[3].checked)?true:false);
     localStorage.setItem(localStorageFullLength(),JSON.stringify(insertBook));
+    books.setAttribute('class','books');
     displayBook(localStorageFullLength()-1);
-    overlay.style.display = "none";
+    overlay.style.display = 'none';
 });
 function readBooksCount(){
     let i=0,
@@ -241,7 +253,7 @@ function displayAllBooks(){
     let i=0;
     let count=0;
     if(localStorage.length>0)
-        books.innerHTML='';
+        document.querySelector('.empty-page').style.display='none';
     while(count<localStorage.length){
         if(!localStorage.getItem(i))
             i++;
@@ -289,6 +301,9 @@ function displayReadBooks(){
 window.onload=function(){
     displayAllBooks();
     updateStats();
+    if(localStorage.length===0){
+        books.setAttribute('class','books books-empty');
+    }
 };
 window.addEventListener('click', function(e) {
     const allBooks=document.querySelectorAll('.book');

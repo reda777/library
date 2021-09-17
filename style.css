@@ -1,3 +1,6 @@
+:root{
+    --bg-color:white;
+}
 * { 
     padding: 0; 
     margin: 0;
@@ -7,9 +10,9 @@ html, body {
     height: 100%;
 }
 body{
-    font-family: Arial, sans-serif;
-    /*font-family: 'Quicksand', sans-serif;*/
+    font-family: 'Quicksand', Arial, sans-serif;
     font-weight: 500;
+    background: var(--bg-color);
 }
 .allDivs{
     display: grid;
@@ -21,9 +24,13 @@ body{
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    justify-content: center;
+    padding-left: 70px;
     flex-grow: 1;
-    background-color: rgb(224, 222, 222);
+    background-color: #e0dede;
+}
+.books-empty{
+    justify-content: center;
+    padding-left: 0;
 }
 hr{
     border:0;
@@ -45,7 +52,7 @@ hr{
     height: 200px;
     opacity: 30%;
 }
-.empty-page span{
+.empty-page>span{
     color: #acabab;
     font-size: 21px;
 }
@@ -95,7 +102,6 @@ hr{
 }
 .stats li{
     padding: 5px 0;
-    display:inline-block;
 }
 .stats li:hover{
     text-decoration: underline #c56f00;
@@ -106,6 +112,12 @@ hr{
 .books input[type=text]{
     height: 30px;
     width: 100%;
+    font-size: 14px;
+    border: 1px solid #c56f00;
+    padding-left: 2px;
+}
+.books input[type=text]:hover{
+    background: #f3ddc1;
 }
 .books label{
     padding-left: 5px;
@@ -115,7 +127,7 @@ hr{
     flex-direction: column;
     height: 200px;
     width: 200px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
 }
 .book-border{
     margin: 4px;
@@ -126,11 +138,15 @@ hr{
 /*inside book*/
 .saveButton{
     display: none;
-    border: 1px solid #aca7a7;
+    border: 1px solid #c56f00;
     border-radius: 2px;
     font-size: 14px;
-    padding: 0 2px;
+    padding: 0px 2px;
+    margin-top:5px;
     cursor: pointer;
+}
+.saveButton:hover{
+    background: #f3ddc1;
 }
 .book .dropdown{
     justify-content: flex-end;
@@ -140,14 +156,19 @@ hr{
     align-items: center;
     position: relative;
     padding: 0 5px;
-    /*border-left: inherit;
-    border-bottom: inherit;
-    border-bottom-left-radius: 5px;*/
 }
 .dropdown-button{
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    border-radius: 50%;
+}
+.dropdown-button:hover{
+    background: rgba(226, 226, 226, 0.788);
 }
 .book .dropcontent{
     display: none;
@@ -160,7 +181,7 @@ hr{
     z-index: 1;
     overflow: auto;
     min-width: 75px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
 }
 .dropcontent span{
     display: flex;
@@ -170,7 +191,7 @@ hr{
     cursor: pointer;
 }
 .dropcontent span:hover{
-    background-color: rgb(179, 179, 179);
+    background-color: #b3b3b3;
 }
 .book div{
     height: 45px;
@@ -193,11 +214,9 @@ hr{
 /*overlay background*/
 .overlay{
     display: none;
-    /*align-items: center;*/
     justify-content: center;
     height: 100%;
     width: 100%;
-    /*background-color: rgb(134, 145, 156);*/
     background-color: rgba(134, 145, 156, 0.788);
     position: fixed;
     z-index: 1;
@@ -215,7 +234,7 @@ hr{
     height: 400px;
     position: relative;
     top: 15%;
-    background-color: rgb(224, 222, 222);
+    background-color: #e0dede;
     border-radius: 10%;
 }
 form div{
@@ -230,7 +249,7 @@ input[type=text]{
     height: 30px;
     font-size: 21px;
     width: 300px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-color);
     border:none;
     border: 1px oldlace solid;
     border-radius: 5px;
@@ -240,15 +259,16 @@ input[type=text]:focus {
 }
 /*radio input*/
 input[type=radio] {
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid #000000;
     padding: 6px;
-    background-color: rgb(224, 222, 222);
-    -webkit-appearance: none;
+    margin: 0 2px;
+    background-color: #e0dede;
+    appearance: none;
 }
 input[type=radio]:checked {
     background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center;
     background-size: 10px 10px;
-    background-color: rgb(224, 222, 222);
+    background-color: #e0dede;
 }
 input[type=radio]:focus {
     outline-color: transparent;
@@ -262,13 +282,13 @@ input[type=radio]:focus {
 input[type=button], input[type=submit]{
     width: 150px;
     height: 45px;
-    border: 1px grey solid;
+    border: 1px #808080 solid;
     border-radius: 2px;
-    -webkit-appearance: none;
+    appearance: none;
     transition: 250ms;
 }
 input[type=button]:hover, input[type=submit]:hover{
-    background-color: rgb(173, 166, 166);
+    background-color: #ada6a6;
     cursor: pointer;
 }
 
