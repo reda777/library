@@ -4,12 +4,14 @@ const closeAdd=document.querySelector('#closeAdd');
 const form=document.querySelector('.content form');
 const overlay=document.querySelector('.overlay');
 
-function Book(title,author,pages,read) {
-    this.title=title;
-    this.author=author;
-    this.pages=pages;
-    this.read=read;
-}
+class Book{
+    constructor(title,author,pages,read){
+        this.title=title;
+        this.author=author;
+        this.pages=pages;
+        this.read=read;
+    }
+}   
 function displayBook(bookIndex){
     let bookObj=JSON.parse(localStorage.getItem(bookIndex));
     /*create book border div*/
@@ -145,6 +147,7 @@ function displayBook(bookIndex){
             books.setAttribute('class','books books-empty');
             document.querySelector('.empty-page').removeAttribute('style');
         }
+        updateStats();
     });
     saveEdit.addEventListener('click',()=>{
         const saveBook=document.querySelector('#book'+bookIndex);
@@ -167,9 +170,9 @@ function displayBook(bookIndex){
 }
 /*show stats*/
 function updateStats(){
-    const liselect=document.querySelectorAll('.stats ul li')
-    if(liselect){
-        liselect.forEach(element =>{
+    const liSelect=document.querySelectorAll('.stats ul li')
+    if(liSelect){
+        liSelect.forEach(element =>{
             element.remove();
         });
     }
@@ -218,6 +221,7 @@ form.addEventListener('submit', function(event) {
     books.setAttribute('class','books');
     displayBook(localStorageFullLength()-1);
     overlay.style.display = 'none';
+    updateStats();
 });
 function readBooksCount(){
     let i=0,
@@ -252,8 +256,11 @@ function localStorageFullLength(){
 function displayAllBooks(){
     let i=0;
     let count=0;
-    if(localStorage.length>0)
-        document.querySelector('.empty-page').style.display='none';
+    if(localStorage.length>0){
+        const emptyPage=document.querySelector('.empty-page')
+        if(emptyPage!= null)
+            emptyPage.style.display='none';
+    }  
     while(count<localStorage.length){
         if(!localStorage.getItem(i))
             i++;
