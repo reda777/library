@@ -1,6 +1,7 @@
-:root{
-    --bg-color:white;
+:root {
+    --bg-color: white;
 }
+
 @font-face {
     font-family: 'Quicksand';
     font-style: normal;
@@ -8,26 +9,32 @@
     font-display: swap;
     src: url(fonts/Quicksand-VariableFont_wght.ttf) format('woff2');
 }
-* { 
-    padding: 0; 
+
+* {
+    padding: 0;
     margin: 0;
 }
-html, body {
+
+html,
+body {
     min-height: 100%;
     height: 100%;
 }
-body{
+
+body {
     font-family: 'Quicksand', Arial, sans-serif;
     font-weight: 500;
     background: var(--bg-color);
 }
-.allDivs{
+
+.allDivs {
     display: grid;
     grid-template-columns: 300px auto;
     grid-template-rows: 100px auto;
     height: 100%;
 }
-.books{
+
+.books {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
@@ -35,57 +42,66 @@ body{
     flex-grow: 1;
     background-color: #e0dede;
 }
-.books-empty{
+
+.books-empty {
     justify-content: center;
     padding-left: 0;
 }
-hr{
-    border:0;
-    margin:0;
-    width:100%;
-    height:1px;
+
+hr {
+    border: 0;
+    margin: 0;
+    width: 100%;
+    height: 1px;
     background: #e98401;
 }
+
 /*no books interface*/
-.empty-page{
+.empty-page {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     margin-top: 50px;
 }
-.empty-page img{
+
+.empty-page img {
     width: 200px;
     height: 200px;
     opacity: 30%;
 }
-.empty-page>span{
+
+.empty-page>span {
     color: #acabab;
     font-size: 21px;
 }
+
 /*header*/
-.header{
+.header {
     grid-column: 1/3;
     grid-row: 1/2;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom:3px solid #e98401;
+    border-bottom: 3px solid #e98401;
 }
+
 /*sidebar*/
-.sidebar{
+.sidebar {
     grid-column: 1/2;
     grid-row: 2/2;
     border-right: 2px solid #e98401;
 }
+
 /*new book button*/
-.addBook{
+.addBook {
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.addBook button{
+
+.addBook button {
     cursor: pointer;
     width: 100px;
     height: 50px;
@@ -95,67 +111,82 @@ hr{
     border-radius: 4px;
     transition: background-color 0.3s;
 }
-.addBook button:hover{
+
+.addBook button:hover {
     background-color: #e98401;
 }
+
 /*stats*/
-.stats{
-    padding:25px 0 0 25px;
+.stats {
+    padding: 25px 0 0 25px;
 }
-.stats ul{
+
+.stats ul {
     list-style-type: none;
     display: flex;
     flex-direction: column;
 }
-.stats li{
+
+.stats li {
     padding: 5px 0;
 }
-.stats li:hover{
+
+.stats li:hover {
     text-decoration: underline #c56f00;
     color: #c56f00;
     cursor: pointer;
 }
+
 /*book block*/
-.books input[type=text]{
+.books input[type=text],
+.book input[type=number] {
     height: 30px;
     width: 100%;
     font-size: 14px;
     border: 1px solid #c56f00;
     padding-left: 2px;
 }
-.books input[type=text]:hover{
+
+.books input[type=text]:hover,
+.book input[type=number]:hover {
     background: #f3ddc1;
 }
-.books label{
+
+.books label {
     padding-left: 5px;
 }
-.book{
+
+.book {
     display: flex;
     flex-direction: column;
     height: 200px;
     width: 200px;
     background-color: var(--bg-color);
 }
-.book-border{
+
+.book-border {
     margin: 4px;
     padding: 4px;
-    background: linear-gradient(70deg,#aca7a7,#c56f00,#e98401);
+    background: linear-gradient(70deg, #aca7a7, #c56f00, #e98401);
     border-radius: 6px;
 }
+
 /*inside book*/
-.saveButton{
+.saveButton {
     display: none;
     border: 1px solid #c56f00;
     border-radius: 2px;
     font-size: 14px;
     padding: 0px 2px;
-    margin-top:5px;
+    margin-top: 5px;
     cursor: pointer;
 }
-.saveButton:hover{
+
+.saveButton:hover {
     background: #f3ddc1;
 }
-.book .dropdown{
+
+.book .dropdown {
     justify-content: flex-end;
     user-select: none;
     height: 20px;
@@ -164,7 +195,8 @@ hr{
     position: relative;
     padding: 0 5px;
 }
-.dropdown-button{
+
+.dropdown-button {
     cursor: pointer;
     width: 25px;
     height: 25px;
@@ -174,33 +206,38 @@ hr{
     margin-top: 5px;
     border-radius: 50%;
 }
-.dropdown-button:hover{
+
+.dropdown-button:hover {
     background: rgba(226, 226, 226, 0.788);
 }
-.book .dropcontent{
+
+.book .dropcontent {
     display: none;
     flex-direction: column;
     align-items: stretch;
     position: absolute;
-    padding:0;
+    padding: 0;
     font-size: 14px;
-    top:20px;
+    top: 20px;
     z-index: 1;
     overflow: auto;
     min-width: 75px;
     background-color: var(--bg-color);
 }
-.dropcontent span{
+
+.dropcontent span {
     display: flex;
     align-items: center;
     height: 100%;
-    padding-left:5px;
+    padding-left: 5px;
     cursor: pointer;
 }
-.dropcontent span:hover{
+
+.dropcontent span:hover {
     background-color: #b3b3b3;
 }
-.book div{
+
+.book div {
     height: 45px;
     display: flex;
     align-items: center;
@@ -208,18 +245,19 @@ hr{
     white-space: nowrap;
     padding-right: 5px;
 }
-.child1{
+
+.child1 {
     font-weight: 600;
 }
 
-#tog{
+#tog {
     cursor: pointer;
     height: 45px;
     width: 50px;
 }
 
 /*overlay background*/
-.overlay{
+.overlay {
     display: none;
     justify-content: center;
     height: 100%;
@@ -231,8 +269,9 @@ hr{
     top: 0;
     transition: 200ms;
 }
+
 /*overlay content*/
-.content{
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -244,26 +283,33 @@ hr{
     background-color: #e0dede;
     border-radius: 10%;
 }
-form div{
+
+form div {
     margin: 8px;
 }
+
 /* text input*/
-.textInput{
-    display:flex;
+.textInput {
+    display: flex;
     flex-direction: column;
 }
-input[type=text]{
+
+input[type=text],
+input[type=number] {
     height: 30px;
     font-size: 21px;
     width: 300px;
     background-color: var(--bg-color);
-    border:none;
+    border: none;
     border: 1px oldlace solid;
     border-radius: 5px;
 }
-input[type=text]:focus {
+
+input[type=text]:focus,
+input[type=number]:focus {
     outline: none;
 }
+
 /*radio input*/
 input[type=radio] {
     border: 1px solid #000000;
@@ -272,21 +318,26 @@ input[type=radio] {
     background-color: #e0dede;
     appearance: none;
 }
+
 input[type=radio]:checked {
     background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center;
     background-size: 10px 10px;
     background-color: #e0dede;
 }
+
 input[type=radio]:focus {
     outline-color: transparent;
 }
+
 /*buttons add cancel*/
-.submitCancel{
+.submitCancel {
     display: flex;
     justify-content: space-between;
 
 }
-input[type=button], input[type=submit]{
+
+input[type=button],
+input[type=submit] {
     width: 150px;
     height: 45px;
     border: 1px #808080 solid;
@@ -294,10 +345,9 @@ input[type=button], input[type=submit]{
     appearance: none;
     transition: 250ms;
 }
-input[type=button]:hover, input[type=submit]:hover{
+
+input[type=button]:hover,
+input[type=submit]:hover {
     background-color: #ada6a6;
     cursor: pointer;
 }
-
-
-
